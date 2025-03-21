@@ -8,7 +8,7 @@
   <!-- Подключаем стили -->
   <link rel="stylesheet" href="styles.css"/>
 </head>
-<body>
+
 <header>
   <h1>Тест по Python</h1>
   <nav>
@@ -43,60 +43,16 @@
 <script>
   // Список вопросов
   const questions = [
-    {
-      question: "Какой оператор используется для вывода текста в Python?",
-      options: ["echo", "print", "log"],
-      answer: 1
-    },
-    {
-      question: "Как объявить переменную в Python?",
-      options: ["var x = 5", "x = 5", "int x = 5"],
-      answer: 1
-    },
-    {
-      question: "Какой символ используется для комментариев в Python?",
-      options: ["//", "#", "/* */"],
-      answer: 1
-    },
-    {
-      question: "Какой тип данных используется для хранения текста?",
-      options: ["str", "int", "float"],
-      answer: 0
-    },
-    {
-      question: "Какой оператор используется для условных конструкций?",
-      options: ["if", "case", "switch"],
-      answer: 0
-    },
-    {
-      question: "Какой цикл выполняется, пока условие истинно?",
-      options: ["for", "while", "do-while"],
-      answer: 1
-    },
-    {
-      question: "Какая функция используется для получения ввода от пользователя?",
-      options: ["input()", "read()", "scan()"],
-      answer: 0
-    },
-    {
-      question: "Какие типы данных есть в Python?",
-      options: ["int, float, str, bool", "number, string, boolean", "integer, real, text"],
-      answer: 0
-    },
-    {
-      question: "Как можно соединить две строки?",
-      options: ["С помощью оператора +", "С помощью оператора -", "С помощью оператора *"],
-      answer: 0
-    },
-    {
-      question: "Что делает конструкция elif?",
-      options: [
-        "Позволяет выполнить дополнительное условие",
-        "Завершает программу",
-        "Запускает цикл"
-      ],
-      answer: 0
-    }
+    { question: "Какой оператор используется для вывода текста в Python?", options: ["echo", "print", "log"], answer: 1 },
+    { question: "Какие основные типы данных есть в Python?", options: ["int, float, str, bool", "number, string, boolean", "integer, real, text"], answer: 0 },
+    { question: "Какая программа выведет на экран ‘Привет, мир!’?", options: ["console.log('Привет, мир!');", "print('Привет, мир!')", "echo 'Привет, мир!'"], answer: 1 },
+    { question: "Какой оператор используется для условных конструкций в Python?", options: ["if", "case", "switch"], answer: 0 },
+    { question: "Какой цикл выполняется, пока условие истинно?", options: ["for", "while", "do-while"], answer: 1 },
+    { question: "Как объявить переменную в Python?", options: ["var x = 5", "x = 5", "int x = 5"], answer: 1 },
+    { question: "Как в Python проверить возраст и дать разные сообщения?", options: ["if, elif, else", "switch, case, default", "try, except, finally"], answer: 0 },
+    { question: "Как можно соединить две строки?", options: ["С помощью оператора +", "С помощью оператора -", "С помощью оператора *"], answer: 0 },
+    { question: "Какой цикл удобно использовать, если заранее известно количество повторений?", options: ["for", "while", "do-while"], answer: 0 },
+    { question: "Какой результат работы кода: name = 'Аня' \n age = 17 \n print(f'Имя: {name}, Возраст: {age}')?", options: ["Имя: Аня, Возраст: 17", "Ошибка в коде", "None"], answer: 0 }
   ];
 
   let currentQuestion = 0;
