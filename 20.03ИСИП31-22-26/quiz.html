@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Тест по Python</title>
+
+  <!-- Подключаем стили -->
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<header>
+  <h1>Тест по Python</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="basics.html">Основы Python</a></li>
+      <li><a href="quiz.html">Тест</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h2>Интерактивный тест по Python</h2>
+  
+  <!-- Прогресс -->
+  <div id="progress-bar">
+    <div id="progress"></div>
+  </div>
+  
+  <div id="quiz-container">
+    <div class="question" id="question"></div>
+    <div id="options"></div>
+    <button id="next-btn" onclick="nextQuestion()">Далее</button>
+  </div>
+  <p id="result" class="hidden"></p>
+</main>
+
+<footer>
+  <p>&copy; 2025 Курс по Python</p>
+</footer>
+
+<script>
+  // Список вопросов
+  const questions = [
+    {
+      question: "Какой оператор используется для вывода текста в Python?",
+      options: ["echo", "print", "log"],
+      answer: 1
+    },
+    {
+      question: "Как объявить переменную в Python?",
+      options: ["var x = 5", "x = 5", "int x = 5"],
+      answer: 1
+    },
+    {
+      question: "Какой символ используется для комментариев в Python?",
+      options: ["//", "#", "/* */"],
+      answer: 1
+    },
+    {
+      question: "Какой тип данных используется для хранения текста?",
+      options: ["str", "int", "float"],
+      answer: 0
+    },
+    {
+      question: "Какой оператор используется для условных конструкций?",
+      options: ["if", "case", "switch"],
+      answer: 0
+    },
+    {
+      question: "Какой цикл выполняется, пока условие истинно?",
+      options: ["for", "while", "do-while"],
+      answer: 1
+    },
+    {
+      question: "Какая функция используется для получения ввода от пользователя?",
+      options: ["input()", "read()", "scan()"],
+      answer: 0
+    },
+    {
+      question: "Какие типы данных есть в Python?",
+      options: ["int, float, str, bool", "number, string, boolean", "integer, real, text"],
+      answer: 0
+    },
+    {
+      question: "Как можно соединить две строки?",
+      options: ["С помощью оператора +", "С помощью оператора -", "С помощью оператора *"],
+      answer: 0
+    },
+    {
+      question: "Что делает конструкция elif?",
+      options: [
+        "Позволяет выполнить дополнительное условие",
+        "Завершает программу",
+        "Запускает цикл"
+      ],
+      answer: 0
+    }
+  ];
+
+  let currentQuestion = 0;
+  let score = 0;
+  let selectedOptionIndex = null; // тут будем хранить выбранный пользователем вариант
+
+  // Загружаем первый вопрос
+  window.onload = loadQuestion;
+
+  function loadQuestion() {
+    const questionObj = questions[currentQuestion];
+    document.getElementById("question").innerText = questionObj.question;
+    
+    const optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML = "";
+
+    // Для каждого варианта ответа создаём кнопку
+    questionObj.options.forEach((optionText, index) => {
+      const button = document.createElement("button");
+      button.classList.add("option-btn");
+      button.innerText = optionText;
+      button.onclick = () => selectOption(index);
+      optionsDiv.appendChild(button);
+    });
+
+    // Обновляем прогресс
+    updateProgress();
+  }
+
+  function selectOption(index) {
+    // Сохраняем выбранный вариант
+    selectedOptionIndex = index;
+
+    // Сбрасываем "выделение" на всех кнопках
+    const allButtons = document.querySelectorAll(".option-btn");
+    allButtons.forEach(btn => btn.classList.remove("selected"));
+
+    // Подсвечиваем нажатую кнопку
+    allButtons[index].classList.add("selected");
+
+    // Лёгкая анимация "нажатия"
+    allButtons[index].classList.add("pressed");
+    setTimeout(() => {
+      allButtons[index].classList.remove("pressed");
+    }, 150);
+  }
+
+  function nextQuestion() {
+    // Проверяем, выбрал ли пользователь какой-нибудь вариант
+    if (selectedOptionIndex === null) {
+      alert("Сначала выберите ответ!");
+      return;
+    }
+
+    // Проверяем ответ и, если верный, увеличиваем счёт
+    if (selectedOptionIndex === questions[currentQuestion].answer) {
+      score++;
+    }
+
+    currentQuestion++;
+    selectedOptionIndex = null; // сбрасываем выбор
+    
+    // Если ещё есть вопросы – показываем следующий
+    if (currentQuestion < questions.length) {
+      loadQuestion();
+    } else {
+      // Прячем блок с тестом
+      document.getElementById("quiz-container").classList.add("hidden");
+      // Показываем результат
+      document.getElementById("result").innerText =
+        `Вы набрали ${score} из ${questions.length} баллов!`;
+      document.getElementById("result").classList.remove("hidden");
+    }
+  }
+
+  function updateProgress() {
+    const progress = document.getElementById("progress");
+    const total = questions.length;
+
+    // Если мы на последнем вопросе, прогресс должен быть 100%
+    let percent = ((currentQuestion + 1) / total) * 100;
+    
+    if (percent > 100) percent = 100; // Защита от выхода за 100%
+    
+    progress.style.width = percent + "%";
+    }
+
+</script>
+</body>
+</html>

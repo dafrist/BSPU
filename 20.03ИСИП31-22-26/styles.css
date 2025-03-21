@@ -1,0 +1,568 @@
+/* ===================== */
+/*       ШАПКА САЙТА     */
+/* ===================== */
+
+/* Устанавливаем изображение шапки с плавным переходом */
+header {
+    background: url('header-image.png') no-repeat center center;
+    background-size: cover;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+}
+
+/* Плавный переход между шапкой и фоном */
+header::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+    z-index: -1;
+}
+
+/* ===================== */
+/*        ОСНОВА         */
+/* ===================== */
+
+body {
+    background: url('background-image.png') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* Центрирование и общий стиль для текста */
+p, ul, li, table {
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    line-height: 1.8;
+    padding: 5px 10px;
+    border-radius: 10px;
+    box-shadow: none;
+    background: none;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Заголовки */
+h1, h2 {
+    color: #ffcc00;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-top: 0;
+}
+
+/* Лёгкий эффект «неон» при наведении на h1 и h2 */
+h1:hover, h2:hover {
+    text-shadow: 0 0 8px #ffcc00, 0 0 15px #ffcc00;
+}
+
+/* Специальные стили для h2 (рамка снизу и т.д.) */
+h2 {
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 2px solid #ffcc00;
+    padding-bottom: 5px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+/* Анимация появления при прокрутке */
+.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===================== */
+/*     ОТДЕЛКА КОДА      */
+/* ===================== */
+
+pre {
+    background: #1e1e1e;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    overflow-x: auto;
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 15px auto;
+    border-left: 4px solid #ffcc00;
+    max-width: 650px;
+}
+
+/* ===================== */
+/*      ТАБЛИЦЫ          */
+/* ===================== */
+
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+th {
+    background-color: #ffcc00;
+    color: #333;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ===================== */
+/*       НАВИГАЦИЯ       */
+/* ===================== */
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 10px;
+}
+
+nav ul li a {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffcc00;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: inline-block;
+    border: 2px solid #ffcc00;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background: #ffcc00;
+    color: black;
+}
+
+/* ============================== */
+/*   СТИЛИ ДЛЯ БЛОКА С ВОПРОСАМИ  */
+/* ============================== */
+
+/* Основной контейнер теста */
+#quiz-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.65); /* Лёгкое затенение */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    position: relative;
+}
+
+/* Заголовок вопроса */
+.question {
+    font-size: 26px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Варианты ответа в виде кнопок */
+.option-btn {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    text-align: left;
+    border: 2px solid #ffcc00;
+    border-radius: 6px;
+    background-color: transparent;
+    color: #ffcc00;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.15s;
+    position: relative;
+}
+
+/* Эффект наведения: подсвечиваем фон */
+.option-btn:hover {
+    background-color: rgba(255, 204, 0, 0.2);
+}
+
+/* При нажатии: небольшое уменьшение */
+.option-btn:active {
+    transform: scale(0.97);
+}
+
+/* Класс, который мы добавляем при клике для анимации "press" */
+.pressed {
+    transform: scale(0.95);
+    background-color: rgba(255, 204, 0, 0.3);
+}
+
+/* Класс выделения выбранного варианта */
+.selected {
+    background-color: rgba(179, 255, 0, 0.274);
+    border-color: #00ff00;
+    color: #16ff01;
+}
+
+/* Кнопка "Далее" */
+#next-btn {
+    background-color: #ffcc00;
+    color: #333;
+    font-size: 20px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
+}
+
+/* Ховер-эффект */
+#next-btn:hover {
+    background-color: #ffdb4d;
+}
+
+/* Эффект нажатия */
+#next-btn:active {
+    transform: scale(0.97);
+}
+
+/* Скрываем элементы при необходимости */
+.hidden {
+    display: none;
+}
+
+/* Блок для результата */
+#result {
+    font-size: 24px;
+    text-align: center;
+    margin: 20px auto;
+}
+
+/* ============================== */
+/*     ПРОГРЕСС-БАР (если нужен)  */
+/* ============================== */
+
+#progress-bar {
+    width: 100%;
+    background-color: #666;
+    border-radius: 5px;
+    height: 10px;
+    margin: 0 auto 20px auto;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#progress {
+    background-color: #4caf50;
+    height: 100%;
+    width: 0; /* Начальное состояние */
+    transition: width 0.3s ease;
+}
+
+
+/* ===================== */
+/*       ПОДВАЛ          */
+/* ===================== */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Минимальная высота на весь экран */
+}
+
+.content {
+    flex: 1; /* Заполняет пространство между header и footer */
+}
+
+footer {
+    width: 100%;
+    background-color: rgba(0,0,0,0.8);
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+}
+
+
+
+
+/* ===================== */
+/*   ДОПОЛНИТЕЛЬНЫЕ ИДЕИ */
+/* ===================== */
+
+/* 1) Плавное появление контента при прокрутке (reveal):
+   В JS можно добавлять класс .reveal, когда элемент в зоне видимости */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 2) Кнопка «Вверх» (если захотите добавить) */
+#scrollTopBtn {
+    display: none; /* изначально скрыта */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #ffcc00;
+    color: #333;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    transition: opacity 0.3s;
+}
+
+#scrollTopBtn:hover {
+    background-color: #ffdb4d;
+}
+
+
+/* Стили для основ Python */
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+h1, h2 {
+    color: #ffcc00;
+}
+
+/* Поле для ввода кода */
+textarea {
+    width: 90%;
+    height: 150px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    background: #1e1e1e;
+    color: #ffffff;
+    border: 2px solid #ffcc00;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Кнопка запуска */
+button {
+    background-color: #ffcc00;
+    color: black;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #ffdb4d;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* Блок вывода результата */
+pre {
+    background: #1e1e1e;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    overflow-x: auto;
+    max-width: 90%;
+    margin: 20px auto;
+    border-left: 4px solid #ffcc00;
+}
+
+/* Подвал */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    width: 100%;
+    margin-top: 50px;
+}
+
+/* Улучшенный стиль страницы */
+.basics-page main {
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+h1, h2 {
+    color: #ffcc00;
+}
+
+/* Поле для ввода кода */
+textarea {
+    width: 90%;
+    height: 150px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    background: #1e1e1e;
+    color: #ffffff;
+    border: 2px solid #ffcc00;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Кнопки */
+button {
+    background-color: #ffcc00;
+    color: black;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #ffdb4d;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* Блок вывода результата */
+pre {
+    background: #1e1e1e;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    overflow-x: auto;
+    max-width: 90%;
+    margin: 20px auto;
+    border-left: 4px solid #ffcc00;
+}
+
+/* Стили ошибок */
+.error-output {
+    color: #ff4444;
+    font-weight: bold;
+    background: rgba(255, 0, 0, 0.1);
+    padding: 10px;
+    border-left: 4px solid red;
+}
+.success-output {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+/* Переключение темы */
+.light-theme {
+    background: #ffffff;
+    color: black;
+}
+.light-theme textarea,
+.light-theme pre {
+    background: #f0f0f0;
+    color: black;
+    border-color: #000;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    textarea, pre {
+        width: 100%;
+        font-size: 14px;
+    }
+    button {
+        width: 100%;
+        font-size: 16px;
+    }
+}
+
+
+/* ===================== */
+/*   СТИЛИ ВЫПАДАЮЩЕГО СПИСКА */
+/* ===================== */
+
+select {
+    background-color: #1e1e1e;
+    color: #ffcc00;
+    border: 2px solid #ffcc00;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+}
+
+select:hover {
+    background-color: #2c2c2c;
+    border-color: #ffdb4d;
+}
+
+select:focus {
+    background-color: #333;
+    border-color: #ffdb4d;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.8);
+}
+
+option {
+    background-color: #1e1e1e;
+    color: #ffcc00;
+}
+
+option:hover {
+    background-color: #333;
+}
