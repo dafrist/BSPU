@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основы Python</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+</head>
+<body class="basics-page">
+    <header>
+        <h1>Основы Python</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="basics.html">Основы Python</a></li>
+                <li><a href="quiz.html">Тест</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Основные конструкции языка Python</h2>
+        <p>Выберите пример или введите свой код:</p>
+
+        <select id="exampleSelect" onchange="loadExample()">
+            <option value="">Выберите пример...</option>
+            <option value="print('Hello, Python!')">Вывод текста</option>
+            <option value="for i in range(5): print(i)">Цикл for</option>
+        </select>
+
+        <textarea id="code">print("Hello, Python!")</textarea><br>
+        
+        <button onclick="runPython()">Запустить</button>
+        <button onclick="clearCode()">Очистить</button>
+
+        <h3>Случайное задание:</h3>
+        <button onclick="generateTask()">Случайное задание</button>
+        <p id="task"></p>
+
+        <pre id="output">Вывод появится здесь...</pre>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Курс по Python</p>
+    </footer>
+
+    <script>
+        // Загружаем пример кода
+        function loadExample() {
+            let codeArea = document.getElementById("code");
+            let example = document.getElementById("exampleSelect").value;
+            if (example) codeArea.value = example;
+        }
+
+        // Запуск Python-кода
+        async function runPython() {
+            let outputElement = document.getElementById("output");
+            let code = document.getElementById("code").value;
+
+            // Функция для эмуляции input() и перехвата stdout
+            const pyodideSetup = `
+        import sys
+        from io import StringIO
+
+        class StdoutCatcher:
+            def __init__(self):
+                self.output = StringIO()
+            def write(self, text):
+                self.output.write(text)
+            def get_output(self):
+                return self.output.getvalue()
+
+        stdout_catcher = StdoutCatcher()
+        sys.stdout = stdout_catcher
+
+        def input(prompt_text=""):
+            import js
+            return js.prompt(prompt_text)
+        `;
+
+            try {
+                outputElement.className = "";
+                outputElement.innerText = "Выполняется...";
+                let pyodide = await loadPyodide();
+                
+                // Загружаем обработку input() и перехват stdout
+                pyodide.runPython(pyodideSetup);
+
+                // Выполняем код пользователя
+                pyodide.runPython(code);
+
+                // Получаем результат вывода print()
+                let result = pyodide.runPython("stdout_catcher.get_output()");
+
+                // Если результат пустой, выводим "Программа выполнена без вывода"
+                outputElement.innerText = result.trim() ? result.trim() : "Программа выполнена без вывода";
+                outputElement.classList.add("success-output");
+            } catch (error) {
+                outputElement.innerText = "Ошибка: " + error.message;
+                outputElement.classList.add("error-output");
+            }
+        }
+
+
+
+
+        // Очистка кода
+        function clearCode() {
+            document.getElementById("code").value = "";
+            document.getElementById("output").innerText = "Вывод появится здесь...";
+            localStorage.removeItem("pythonCode");
+        }
+
+        // Генерация случайного задания
+        const tasks = [
+            "Создайте список чисел от 1 до 10 и выведите их по порядку",
+            "Выведи в ответ текст: I LOVE BSPU"
+        ];
+
+        function generateTask() {
+            let randomTask = tasks[Math.floor(Math.random() * tasks.length)];
+            document.getElementById("task").innerText = randomTask;
+        }
+
+        // Авто-сохранение кода
+        document.getElementById("code").addEventListener("input", function() {
+            localStorage.setItem("pythonCode", this.value);
+        });
+
+        window.onload = function() {
+            let savedCode = localStorage.getItem("pythonCode");
+            if (savedCode) {
+                document.getElementById("code").value = savedCode;
+            }
+        };
+
+        // Переключение темы
+        function toggleTheme() {
+            document.body.classList.toggle("light-theme");
+        }
+    </script>
+</body>
+</html>
