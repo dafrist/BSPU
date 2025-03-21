@@ -1,0 +1,94 @@
+/* styles-mobile.css - Адаптация под мобильные устройства */
+
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 16px; /* Не меняй глобальные стили сильно */
+        padding: 10px;
+    }
+
+    header {
+        height: auto;
+        padding: 15px;
+        text-align: center;
+    }
+
+    /* Остальные стили для мобильных */
+}
+
+/* Общие стили */
+body {
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 10px;
+}
+
+/* Шапка */
+header {
+    height: auto;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Навигация */
+nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+nav ul li {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+}
+
+nav ul li a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+}
+
+/* Контент */
+.content-section {
+    padding: 15px;
+    text-align: left;
+}
+
+pre {
+    font-size: 14px;
+    padding: 10px;
+}
+
+/* Тест */
+#quiz-container {
+    max-width: 100%;
+    padding: 15px;
+}
+
+.option-btn {
+    font-size: 16px;
+    padding: 10px;
+}
+
+#next-btn {
+    width: 100%;
+}
+
+/* Видео */
+.video-container {
+    width: 100%;
+    height: auto;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 250px;
+}
+
+/* Подвал */
+footer {
+    padding: 10px;
+    font-size: 14px;
+}
